@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>List of Items</h1>
+    <ul id="items"></ul>
+    <input type="text" id="newText" />
+    <input type="button" value="Add" onclick="addItem()">
+
+    <script>
+        function addItem() {
+            let content = document.getElementById("newText").value;
+
+            let child = document.createElement("li");
+            child.appendChild(document.createTextNode(content + ' ')); 
+
+            let span = document.createElement("span");
+            span.innerHTML = '<a href="#">[Delete]</a>';
+            span.firstChild.addEventListener('click', deleteItem);
+            child.appendChild(span);
+
+            document.getElementById("items").appendChild(child);
+            document.getElementById("newText").value = '';
+
+            function deleteItem() {
+                let li = this.parentNode.parentNode;
+                let ul = li.parentNode;
+                ul.removeChild(li);
+            }
+        }
+    </script>
+</body>
+
+</html>
